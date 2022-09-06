@@ -39,4 +39,14 @@ public class UserRepositoryImpl implements UserRepositoryCustom{
                 .from(siteUser)
                 .fetchOne();
     }
+
+    @Override
+    public SiteUser getQslUserOrderIdAscOne(long l) {
+        return jpaQueryFactory
+                .select(siteUser)
+                .from(siteUser)
+                .orderBy(siteUser.id.asc())
+                .limit(1) // 정렬 후 첫번째 값만 가져옴.
+                .fetchOne();
+    }
 }
