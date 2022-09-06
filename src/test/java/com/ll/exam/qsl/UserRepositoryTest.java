@@ -20,8 +20,18 @@ class UserRepositoryTest {
 	@Test
 	@DisplayName("회원 생성")
 	void test_1() {
-		SiteUser user1 = new SiteUser(null, "user1", "{noop}1234", "user1@test.com");
-		SiteUser user2 = new SiteUser(null, "user2", "{noop}1234", "user2@test.com");
+		SiteUser user1 = SiteUser.builder()
+				.username("user1")
+				.password("{noop}1234")
+				.email("user1@test.com")
+				.build();
+
+		// 빌더를 쓰는 경우 인자 순서가 달라도 상관 없다.
+		SiteUser user2 = SiteUser.builder()
+				.username("user2")
+				.password("{noop}1234")
+				.email("user2@test.com")
+				.build();
 
 		userRepository.saveAll(Arrays.asList(user1, user2));
 	}
